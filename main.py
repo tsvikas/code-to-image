@@ -3,7 +3,7 @@ import textwrap
 import streamlit as st
 from pygments import highlight
 from pygments.formatters import ImageFormatter
-from pygments.lexers import get_lexer_by_name
+from pygments.lexers import get_lexer_by_name, guess_lexer
 
 from code_to_image.prettifiers import get_prettifier_by_name
 
@@ -64,6 +64,11 @@ code_image = highlight(
 )
 
 # outputs
+with col1:
+    guessed_lexer = guess_lexer(code_formatted)
+    if guessed_lexer.name != lexer.name:
+        st.markdown(f"Language: {guessed_lexer.name.replace(' only', '')}?")
+
 st.header("Output")
 if not format_success:
     st.caption("Auto-Format failed")
