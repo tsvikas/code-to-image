@@ -10,7 +10,7 @@ from code_to_image.prettifiers import get_prettifier_by_name
 IMAGE_FORMAT = "png"
 MIME_FORMAT = f"image/{IMAGE_FORMAT.lower()}"
 TITLE = "Code Formatter"
-CODE_SAMPLE = "print('add your code')"
+CODE_SAMPLE = "print('add your code here')"
 LANGUAGES = [
     "Python",
     "Text",
@@ -29,7 +29,9 @@ LANGUAGES = [
 # inputs
 st.set_page_config("Code Formatter")
 st.title(TITLE)
-code_input = st.text_area("Code Input", CODE_SAMPLE, height=200)
+code_input = st.text_area("Code Input", placeholder=CODE_SAMPLE, height=200)
+if not code_input:
+    code_input = CODE_SAMPLE
 col1, col2 = st.columns(2)
 with col1:
     st.markdown("##### General options")
