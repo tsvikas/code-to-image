@@ -14,14 +14,14 @@ CODE_SAMPLE = "print ( 'hello, world' )"
 # inputs
 st.set_page_config("Code Formatter")
 st.title(TITLE)
-code_input = st.text_area("Code Input", CODE_SAMPLE, height=300)
+code_input = st.text_area("Code Input", CODE_SAMPLE, height=200)
 col1, col2 = st.columns(2)
 with col1:
     line_length = st.slider("Line Length", 20, 120, 88)
 with col2:
-    line_numbers = st.checkbox("Show Line Numbers", True)
-    string_normalization = st.checkbox("String Normalization", True)
-    magic_trailing_comma = st.checkbox("Magic Trailing Comma", True)
+    line_numbers = st.checkbox("Line Numbers", True)
+    string_normalization = st.checkbox("-S", True)
+    magic_trailing_comma = st.checkbox("-C", True)
 
 # process
 code_formatted = black.format_str(
@@ -41,15 +41,5 @@ code_image = highlight(
 
 # outputs
 st.subheader("Output")
-download_filename = (
-    TITLE.replace(" ", "")
-    + "_"
-    + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    + "."
-    + IMAGE_FORMAT
-)
-st.download_button(
-    "Download Image", code_image, mime=MIME_FORMAT, file_name=download_filename
-)
-st.image(code_image, output_format=IMAGE_FORMAT.upper(), use_column_width=False)
+st.image(code_image, output_format=IMAGE_FORMAT.upper())
 st.code(code_formatted + "\n", language="python")
