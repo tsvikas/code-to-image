@@ -19,7 +19,6 @@ LANGUAGES = [
     "Java",
     "JavaScript",
     "SQL",
-    "Assembly",
     "Go",
     "Ruby",
     "Rust",
