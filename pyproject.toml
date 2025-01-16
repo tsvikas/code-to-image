@@ -7,7 +7,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
   "pygments ~=2.15",
-  "streamlit ~=1.30",
+  "streamlit ~=1.41",
   "black ~=24.0",
 ]
 
