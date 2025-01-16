@@ -1,16 +1,15 @@
-[tool.poetry]
+[project]
 name = "code-to-image"
 version = "0.1.0"
 description = ""
-authors = ["Tsvika S <tsvikas@gmail.com>"]
+authors = [{name="Tsvika Shapira", email="tsvikas@gmail.com"}]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-pygments = "^2.15.0"
-streamlit = "^1.30.0"
-black = "^24.3.0"
-
+requires-python = ">=3.10"
+dependencies = [
+  "pygments ~=2.15",
+  "streamlit ~=1.30",
+  "black ~=24.0",
+]
 
 [build-system]
 requires = ["poetry-core"]
