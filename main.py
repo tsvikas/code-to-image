@@ -46,7 +46,8 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("##### General options")
     language = st.selectbox("Language", LANGUAGES)
-    output_type = st.radio("Output Type", ["Image (line numbers)", "Image", "Text"])
+    output_type = st.radio("Output type", ["Image", "Text"])
+    line_numbers = st.checkbox("Add line numbers", True)
 with col2:
     st.markdown("##### Format options")
     dedent = st.checkbox("dedent", True)
@@ -79,8 +80,7 @@ with col1:
 st.header("Output")
 if not format_success:
     st.caption("Auto-Format failed")
-if output_type in ["Image (line numbers)", "Image"]:
-    line_numbers = output_type in ["Image (line numbers)"]
+if output_type in ["Image"]:
     code_image = highlight(
         code_formatted,
         lexer,
@@ -88,4 +88,8 @@ if output_type in ["Image (line numbers)", "Image"]:
     )
     st.image(code_image, output_format=IMAGE_FORMAT.upper())
 elif output_type in ["Text"]:
-    st.code(code_formatted + "\n", language=LANGUAGE_TO_ST_NAME[language])
+    st.code(
+        code_formatted + "\n",
+        language=LANGUAGE_TO_ST_NAME[language],
+        line_numbers=line_numbers,
+    )
