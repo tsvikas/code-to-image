@@ -1,16 +1,16 @@
 [project]
 name = "code-to-image"
 version = "0.1.0"
-description = ""
+description = "streamlit app to convert a python code to image"
 authors = [{name="Tsvika Shapira", email="tsvikas@gmail.com"}]
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-  "pygments ~=2.15",
-  "streamlit ~=1.30",
-  "black ~=24.0",
+    "pygments ~=2.15",
+    "streamlit ~=1.30",
+    "black ~=24.0",
 ]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
