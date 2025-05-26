@@ -35,7 +35,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("##### General options")
     language = st.selectbox("Language", LANGUAGES)
-    line_numbers = st.checkbox("Line Numbers", True)
+    output_type = st.radio("Output Type", ["Image (line numbers)", "Image", "Text"])
 with col2:
     st.markdown("##### Format options")
     dedent = st.checkbox("dedent", True)
@@ -58,11 +58,6 @@ code_formatted = textwrap.dedent(code_input) if dedent else code_input
 prettify_func = get_prettifier_by_name(language)
 code_formatted, format_success = prettify_func(code_formatted, options)
 lexer = get_lexer_by_name(language)
-code_image = highlight(
-    code_formatted,
-    lexer,
-    ImageFormatter(image_format=IMAGE_FORMAT, line_numbers=line_numbers),
-)
 
 # outputs
 with col1:
@@ -73,5 +68,13 @@ with col1:
 st.header("Output")
 if not format_success:
     st.caption("Auto-Format failed")
-st.image(code_image, output_format=IMAGE_FORMAT.upper())
-st.code(code_formatted + "\n", language="python")
+if output_type in ["Image (line numbers)", "Image"]:
+    line_numbers = output_type in ["Image (line numbers)"]
+    code_image = highlight(
+        code_formatted,
+        lexer,
+        ImageFormatter(image_format=IMAGE_FORMAT, line_numbers=line_numbers),
+    )
+    st.image(code_image, output_format=IMAGE_FORMAT.upper())
+elif output_type in ["Text"]:
+    st.code(code_formatted + "\n", language="python")
