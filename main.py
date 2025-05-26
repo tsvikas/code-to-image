@@ -23,7 +23,18 @@ LANGUAGES = [
     "Ruby",
     "Rust",
 ]
-
+LANGUAGE_TO_ST_NAME = {
+    "Python": "python",
+    "Text": None,
+    "C": "c",
+    "C++": "cpp",
+    "Java": "java",
+    "JavaScript": "javascript",
+    "SQL": "sql",
+    "Go": "go",
+    "Ruby": "ruby",
+    "Rust": "rust",
+}
 
 # inputs
 st.set_page_config("Code Formatter")
@@ -77,4 +88,4 @@ if output_type in ["Image (line numbers)", "Image"]:
     )
     st.image(code_image, output_format=IMAGE_FORMAT.upper())
 elif output_type in ["Text"]:
-    st.code(code_formatted + "\n", language="python")
+    st.code(code_formatted + "\n", language=LANGUAGE_TO_ST_NAME[language])
